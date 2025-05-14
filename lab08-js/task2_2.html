@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання 2.2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      margin-top: 50px;
+    }
+    #container {
+      border: 2px solid #ccc;
+      padding: 20px;
+      display: inline-block;
+      background-color: #ffffff;
+    }
+    #image {
+      width: 300px;
+      height: auto;
+      cursor: pointer;
+    }
+    #caption {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #333;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="container" onclick="handleClick(event)">
+    <img id="image" src="images/photo1.jpg" alt="Фото">
+    <p id="caption">Це перше зображення</p>
+  </div>
+
+  <script>
+    let imageSwitched = false;
+
+    function handleClick(event) {
+      const target = event.target;
+
+      // Зміна кольору підпису при кліку
+      if (target.id === 'caption') {
+        target.style.color = target.style.color === 'red' ? 'black' : 'red';
+      }
+
+      // Заміна зображення при кліку на нього
+      if (target.id === 'image') {
+        const img = document.getElementById('image');
+        const caption = document.getElementById('caption');
+
+        if (!imageSwitched) {
+          img.src = "images/photo2.jpg"; // правильна папка
+          caption.innerText = "Це друге зображення";
+        } else {
+          img.src = "images/photo1.jpg";
+          caption.innerText = "Це перше зображення";
+        }
+
+        imageSwitched = !imageSwitched;
+      }
+    }
+  </script>
+</body>
+</html>
