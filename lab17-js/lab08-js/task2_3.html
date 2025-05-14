@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання 2.3</title>
+  <style>
+    #k1 {
+      position: absolute;
+      left: 50px;
+      top: 150px;
+      width: 300px;
+      height: 100px;
+      background-color: blue;
+    }
+    #k2 {
+      position: relative;
+      left: 25px;
+      top: 20px;
+      width: 200px;
+      height: 50px;
+      background-color: yellow;
+    }
+    h1 {
+      color: #ff00ff;
+    }
+  </style>
+</head>
+<body id="B" onclick="rodEl()" style="height: 600px; background-color: #AAAAAA;">
+  <h1 id="HH" onclick="H_l()">КОЛІР</h1>
+  <div id="k1" onclick="D_l()">
+    <div id="k2" onclick="D_2(this)"></div>
+  </div>
+
+  <script>
+    function rodEl() {
+      var z = document.getElementById("B").style.backgroundColor;
+      document.getElementById("B").style.backgroundColor = (z !== "rgb(119, 119, 119)" ? "#777777" : "#AAAAAA");
+    }
+
+    function H_l() {
+      window.event.cancelBubble = true;
+      var z = document.getElementById("HH").style.color;
+      document.getElementById("HH").style.color = (z === "rgb(170, 0, 170)" ? "#00ffff" : "#aa00aa");
+    }
+
+    function D_l() {
+      window.event.cancelBubble = true;
+      var z = document.getElementById("k1").style.backgroundColor;
+      document.getElementById("k1").style.backgroundColor = (z !== "red" ? "red" : "green");
+    }
+
+    function D_2(thi) {
+      window.event.cancelBubble = true;
+      var z = thi.style.backgroundColor;
+      thi.style.backgroundColor = (z === "rgb(255, 0, 255)" ? "#00ffff" : "#ff00ff");
+    }
+  </script>
+</body>
+</html>

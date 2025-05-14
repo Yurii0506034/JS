@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Практична робота 15 - jQuery та ES6</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+        .task {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Практична робота 15 - Використання бібліотеки jQuery</h1>
+
+    <!-- Завдання 1 -->
+    <div class="task">
+        <h2>Завдання 1: Додати target="_blank" для зовнішніх посилань</h2>
+        <a href="https://google.com">Google</a><br>
+        <a href="https://github.com">GitHub</a><br>
+        <a href="/local/page.html">Локальне посилання</a>
+    </div>
+
+    <!-- Завдання 2 -->
+    <div class="task">
+        <h2>Завдання 2: Стилізація h2.head та .inner</h2>
+        <h2 class="head">header1</h2>
+        <h2 class="head">header2 <span class="inner">inner elem1</span></h2>
+        <h2>header3</h2>
+        <h2 class="head">header4<span>inner elem2</span></h2>
+        <h2>header5</h2>
+    </div>
+
+    <!-- Завдання 3 -->
+    <div class="task">
+        <h2>Завдання 3: Переміщення div перед h3</h2>
+        <h3>header1</h3>
+        <div>text1</div>
+        <h3>header2</h3>
+        <div>text2</div>
+    </div>
+
+    <!-- Завдання 4 -->
+    <div class="task">
+        <h2>Завдання 4: Блокування чекбоксів після вибору 3-х</h2>
+        <input type="checkbox" class="check"> 1
+        <input type="checkbox" class="check"> 2
+        <input type="checkbox" class="check"> 3
+        <input type="checkbox" class="check"> 4
+        <input type="checkbox" class="check"> 5
+        <input type="checkbox" class="check"> 6
+    </div>
+
+    <!-- Завдання 5 -->
+    <div class="task">
+        <h2>Завдання 5: Деструктурування масиву</h2>
+        <pre id="task5Output"></pre>
+    </div>
+
+    <!-- Завдання 6 -->
+    <div class="task">
+        <h2>Завдання 6: Деструктурування об'єкта</h2>
+        <pre id="task6Output"></pre>
+    </div>
+
+    <!-- Завдання 7 -->
+    <div class="task">
+        <h2>Завдання 7: Функція mul()</h2>
+        <pre id="task7Output"></pre>
+    </div>
+
+    <!-- Завдання 8 -->
+    <div class="task">
+        <h2>Завдання 8: Стрілкові функції без bind()</h2>
+        <pre id="task8Output"></pre>
+    </div>
+
+    <!-- Завдання 9 -->
+    <div class="task">
+        <h2>Завдання 9: Створення об'єкта Map</h2>
+        <pre id="task9Output"></pre>
+    </div>
+
+    <script>
+        // Завдання 1
+        $('a[href^="https://"]').attr('target', '_blank');
+
+        // Завдання 2
+        $('h2.head').css('background', 'green').find('.inner').css('font-size', '35px');
+
+        // Завдання 3
+        $('h3').each(function () {
+            const next = $(this).next();
+            if (next.is('div')) {
+                next.insertBefore($(this));
+            }
+        });
+
+        // Завдання 4
+        $('.check').on('change', function () {
+            if ($('.check:checked').length === 3) {
+                $('.check').prop('disabled', true);
+            }
+        });
+
+        // Завдання 5 - деструктурування масиву
+        const arr = ["Tom", "Sam", "Ray", "Bob"];
+        let [x, y, , z] = arr;
+        document.getElementById("task5Output").textContent = `x: ${x}\ny: ${y}\nz: ${z}`;
+
+        // Завдання 6 - деструктурування об'єкта
+        let data = {
+            names: ["Sam", "Tom", "Ray", "Bob"],
+            ages: [20, 24, 22, 26],
+        };
+        let { names: [, name2, , name4], ages: [, age2, , age4] } = data;
+        document.getElementById("task6Output").textContent =
+            `name2: ${name2}\nage2: ${age2}\nname4: ${name4}\nage4: ${age4}`;
+
+        // Завдання 7 - mul
+        function mul(...args) {
+            let numbers = args.filter(x => typeof x === "number");
+            return numbers.length ? numbers.reduce((acc, val) => acc * val) : 0;
+        }
+        document.getElementById("task7Output").textContent =
+            `mul(1, "str", 2, 3, true): ${mul(1, "str", 2, 3, true)}\n` +
+            `mul(null, "str", false, true): ${mul(null, "str", false, true)}`;
+
+        // Завдання 8 - без bind
+        let server = {
+            data: 0,
+            convertToString(callback) {
+                callback(() => this.data + "");
+            }
+        };
+        let client = {
+            server,
+            result: "",
+            calc(data) {
+                this.server.data = data;
+                this.server.convertToString(this.notification());
+            },
+            notification() {
+                return (callback) => {
+                    this.result = callback();
+                };
+            }
+        };
+        client.calc(123);
+        document.getElementById("task8Output").textContent =
+            `result: ${client.result}\ntypeof result: ${typeof client.result}`;
+
+        // Завдання 9 - mapBuilder
+        function mapBuilder(keysArray, valuesArray) {
+            const map = new Map();
+            keysArray.forEach((key, i) => map.set(key, valuesArray[i]));
+            return map;
+        }
+
+        let keys = [1, 2, 3, 4];
+        let values = ["div", "span", "b", "i"];
+        let map = mapBuilder(keys, values);
+
+        document.getElementById("task9Output").textContent =
+            `map size: ${map.size}\nmap.get(2): ${map.get(2)}`;
+    </script>
+</body>
+</html>

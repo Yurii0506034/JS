@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Керування лампочкою</title>
+  <style>
+    .lamp {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: white;
+      border: 4px solid #000;
+      margin: 20px auto;
+      transition: background-color 0.3s ease;
+    }
+    .on {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Керування лампочкою</h2>
+  <div class="lamp" id="lamp"></div>
+  <div style="text-align: center;">
+    <button onclick="turnOn()">Увімкнути</button>
+    <button onclick="turnOff()">Вимкнути</button>
+  </div>
+
+  <script>
+    function turnOn() {
+      document.getElementById('lamp').classList.add('on');
+    }
+
+    function turnOff() {
+      document.getElementById('lamp').classList.remove('on');
+    }
+  </script>
+</body>
+</html>

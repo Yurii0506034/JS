@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Lab07 - Завдання 1.1</title>
+  <style>
+    .row {
+      padding: 10px;
+      cursor: pointer;
+      font-size: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="line1" class="row" style="background: yellow; color: black;">Доступ до властивостей і методів</h2>
+  <p name="line2" class="row" style="background: white; color: red;">Колекція all</p>
+  <div id="line3" class="row" style="background: yellow; color: black;">Метод getElementById ()</div>
+
+  <script>
+    // line1 and line3 — через getElementById
+    function toggleColors(id) {
+      let el = document.getElementById(id);
+      if (el.style.background === "yellow") {
+        el.style.background = "blue";
+        el.style.color = "white";
+      } else {
+        el.style.background = "yellow";
+        el.style.color = "black";
+      }
+    }
+
+    // line2 — через document.all
+    function toggleAllCollection() {
+      let el = document.all.line2;
+      if (el.style.background === "white") {
+        el.style.background = "green";
+        el.style.color = "white";
+      } else {
+        el.style.background = "white";
+        el.style.color = "red";
+      }
+    }
+
+    document.getElementById("line1").onclick = () => toggleColors("line1");
+    document.getElementById("line3").onclick = () => toggleColors("line3");
+
+    document.all.line2.onclick = toggleAllCollection;
+  </script>
+</body>
+</html>

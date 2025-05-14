@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>ТРИГОНОМЕТРИЧЕСКИЕ ФУНКЦИИ</title>
+  <script>
+    function validateAndCalculate() {
+      let angle = parseFloat(document.getElementById("angle").value);
+      let func = document.getElementById("func").value;
+      let resultField = document.getElementById("result");
+
+      if (isNaN(angle) || angle <= 0 || angle >= 90) {
+        alert("Угол должен быть больше нуля и меньше 90 градусов");
+        return;
+      }
+
+      let radians = angle * Math.PI / 180;
+      let expression = "Math." + func + "(" + radians + ")";
+      let result = eval(expression);
+
+      let symbol = func === "sin" ? "sin" : func === "cos" ? "cos" : "tan";
+      resultField.innerHTML = `${symbol}(${angle}°) = ${result.toFixed(4)}`;
+    }
+  </script>
+</head>
+<body>
+  <h2>ТРИГОНОМЕТРИЧЕСКИЕ ФУНКЦИИ</h2>
+  <p>Угол должен быть больше нуля и меньше 90 градусов</p>
+  <p>Угол в градусах: <input type="text" id="angle"></p>
+  <p>Функция:
+    <select id="func">
+      <option value="sin">синус</option>
+      <option value="cos">косинус</option>
+      <option value="tan">тангенс</option>
+    </select>
+  </p>
+  <button onclick="validateAndCalculate()">Вычислить</button>
+  <p id="result"></p>
+</body>
+</html>
