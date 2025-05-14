@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Практична робота_01-JS02</title>
+</head>
+<body>
+    Сторінка привітання <br>
+    "Hello WORLD"<br>
+    <button onclick="sayHello()">Привітати СВІТ</button>
+    <button onclick="resetPage()">Скинути сторінку</button>
+
+    <script>
+        function sayHello() {
+            "use strict";
+            var btn = document.querySelector('button');
+            btn.style.display = "none";
+
+            var h1 = document.createElement('h1');
+            h1.className = "big";
+            h1.id = "big";
+            h1.appendChild(document.createTextNode("Я ВІТАЮ ТЕБЕ СВІТ!!!"));
+            document.body.appendChild(h1);
+
+            document.getElementsByTagName("h1")[0].style.color = "red";
+            document.getElementById("big").style.fontSize = "4em";
+            document.getElementById("big").style.textAlign = "center";
+        }
+
+        function resetPage() {
+            var h1 = document.getElementById('big');
+            if (h1) {
+                h1.remove();
+            }
+
+            // Показати кнопку назад
+            document.querySelector('button').style.display = "inline";
+        }
+    </script>
+</body>
+</html>
