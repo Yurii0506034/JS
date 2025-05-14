@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання 2.1</title>
+  <style>
+    .clickable {
+      font-size: 24pt;
+      color: black;
+      background-color: white;
+      cursor: pointer;
+    }
+    .holdable, .hoverable {
+      font-size: 18pt;
+      cursor: pointer;
+      padding: 10px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>П’ять подій з мишкою</h1>
+
+  <p id="clickText" class="clickable" onclick="toggleClick()">Клацніть на мене мишкою</p>
+
+  <p id="holdText" class="holdable"
+     onmousedown="this.style.backgroundColor = 'green'"
+     onmouseup="this.style.backgroundColor = 'yellow'">
+     На цьому тексті натисніть, потримайте і відпустіть ліву кнопку мишки
+  </p>
+
+  <p id="hoverText" class="hoverable"
+     onmouseover="this.style.backgroundColor = 'red'"
+     onmouseout="this.style.backgroundColor = 'lightblue'">
+     Повільно проведіть курсором мишки по цій написи
+  </p>
+
+  <script>
+    let clicked = false;
+    function toggleClick() {
+      const el = document.getElementById("clickText");
+      if (!clicked) {
+        el.style.fontSize = "48pt";
+        el.style.color = "white";
+        el.style.backgroundColor = "lightblue";
+      } else {
+        el.style.fontSize = "24pt";
+        el.style.color = "black";
+        el.style.backgroundColor = "white";
+      }
+      clicked = !clicked;
+    }
+  </script>
+</body>
+</html>
